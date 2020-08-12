@@ -22,17 +22,7 @@ type sumArray(const type arr[], int start, int stop, type initial_value=type())
 }
 
 // explicit instantiation for int
-int sumArray(const int arr[], int start, int stop, int initial_value=0)
-{
-    int sum = initial_value;    
-
-    for (int i = start; i <= stop; i++)     // loop on array from start to stop
-    {
-        sum += arr[i];
-    }
-
-    return sum;
-}
+template int sumArray<int>(const int arr[], int start, int stop, int initial_value = 0);
 
 // a custom class to test our function with non promitive datatypes
 class CustomDataType
