@@ -11,12 +11,10 @@
 using namespace std;
 
 template <typename type>
-class Dollar;
-
-template <typename type>
-class Rupee
+class Currency
 {
-    type value;
+    protected:
+        type value;
 
     public:
         void set_value(type value)
@@ -28,7 +26,15 @@ class Rupee
         { 
             return this -> value; 
         }
+};
 
+template <typename type>
+class Dollar;
+
+template <typename type>
+class Rupee : public Currency<type>
+{
+    public:
         Rupee& operator=(const Dollar<type> &d) 
         {
             this -> value = d.get_value() *  74.84;
@@ -37,21 +43,9 @@ class Rupee
 };
 
 template <typename type>
-class Dollar
+class Dollar : public Currency<type>
 {
-    type value;
-
     public:
-        void set_value(type value)
-        {
-            this -> value = value;
-        }
-
-        type get_value() const
-        { 
-            return this -> value; 
-        }
-
         Dollar& operator=(const Rupee<type> &r) 
         {
             this -> value = r.get_value() *  0.013;
