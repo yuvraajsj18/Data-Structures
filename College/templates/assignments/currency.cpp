@@ -35,7 +35,8 @@ template <typename type>
 class Rupee : public Currency<type>
 {
     public:
-        Rupee& operator=(const Dollar<type> &d) 
+        template <typename fType>
+        Rupee& operator=(const Dollar<fType> &d) 
         {
             this -> value = d.get_value() *  74.84;
             return *this;
@@ -46,7 +47,8 @@ template <typename type>
 class Dollar : public Currency<type>
 {
     public:
-        Dollar& operator=(const Rupee<type> &r) 
+        template <typename fType>
+        Dollar& operator=(const Rupee<fType> &r) 
         {
             this -> value = r.get_value() *  0.013;
             return *this;
@@ -67,6 +69,6 @@ int main()
 
     cout << d1.get_value() << endl;
     cout << r1.get_value() << endl;
-
+    
     return 0;
 }
