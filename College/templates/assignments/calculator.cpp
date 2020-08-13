@@ -16,8 +16,7 @@ class Calculator
 };
 
 int main()
-{
-    cout << Calculator<int>::add(1, 2) << endl;
+{    cout << Calculator<int>::add(1, 2) << endl;
 
     cout << Calculator<float>::subtract(2.0f, 1.5f) << endl;
 

@@ -8,6 +8,7 @@
 #include <iostream>
 using namespace std;
 
+
 template <typename type>
 type sumArray(const type arr[], int start, int stop, type initial_value=type())
 {
