@@ -38,7 +38,7 @@ class Rupee : public Currency<type>
         template <typename fType>
         Rupee& operator=(const Dollar<fType> &d) 
         {
-            this -> value = d.get_value() *  74.84;
+            this->value = d.get_value() * 74.84;
             return *this;
         }
 };
