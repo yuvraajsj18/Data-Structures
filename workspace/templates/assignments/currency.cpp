@@ -11,7 +11,7 @@
 using namespace std;
 
 template <typename type>
-class Currency
+class Currency 
 {
     protected:
         type value;
@@ -88,3 +88,4 @@ int main()
     
     return 0;
 }
+
