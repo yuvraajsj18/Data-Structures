@@ -16,7 +16,7 @@ Design template classes such that they support the following statements:
 
 
 
-### Explaination:
+### Explanation:
 
 We are asked to create two classes **Rupee** and **Dollar** such that they can take *any type of value* as a data member and we can *convert* between the two currency using = operator.
 
