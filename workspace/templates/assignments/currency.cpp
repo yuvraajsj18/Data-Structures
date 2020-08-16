@@ -29,7 +29,23 @@ class Currency
 };
 
 template <typename type>
-class Dollar;
+class Dollar;template <typename type>
+class Currency
+{
+    protected:
+        type value;
+
+    public:
+        void set_value(type value)
+        {
+            this -> value = value;
+        }
+
+        type get_value() const
+        { 
+            return this -> value; 
+        }
+};
 
 template <typename type>
 class Rupee : public Currency<type>
