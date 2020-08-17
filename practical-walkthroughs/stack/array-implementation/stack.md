@@ -1,8 +1,8 @@
 # Stack Implemented with Arrays
 
-### What is stack?
+### What is a stack?
 
-A stack is a data structures that stores a collection of elements and have atleast two operation associated with it:
+A stack is a data structure that stores a collection of elements and has at least two operations associated with it:
 
 1. push		2. pop
 
@@ -14,26 +14,26 @@ Push and pop operation on a stack is done according to LIFO that is *Last in, Fi
 
 ### Implementation
 
-We will implement our stack with dynamically allocated array, you can also implement a stack with linked list or dynamic arrays.
+We will implement our stack with a dynamically allocated array, you can also implement a stack with a linked list or dynamic arrays.
 
 #### Stack class
 
-Stack is a template class that has two *data members*:
+The stack is a template class that has two *data members*:
 
 1. **stack**: this is a dynamically allocated array.
-2. **top**: this is the index of top most element in our array.
+2. **top**: this is the index of topmost element in our array.
 
-Additionally our class will have two *template parameters*:
+Additionally, our class will have two *template parameters*:
 
 1. **type**: type of the elements to be stored in the array.
 2. **size**: maximum size of the stack
 
- Stack will have the following the following *member functions*:
+ The stack will have the following *member functions*:
 
-1. **is_empty**: Return true if stack is empty, false otherwise.
-2. **push**: insert 'element' at the top of stack, if not overflow
-3. **pop**: remove element at the top of stack if not underflow
-4. **display**: print all elements in stack to console
+1. **is_empty**: Return true if the stack is empty, false otherwise.
+2. **push**: insert 'element' at the top of the stack, if not overflow
+3. **pop**: remove the element at the top of the stack if not underflow
+4. **display**: print all elements in the stack to the console
 5. **get_top_element**: returns the top element
 6. **clear**: remove all elements in the stack and reset the top.
 
@@ -64,7 +64,7 @@ Now let's define each function one by one.
 
 1. **Stack()**: This is our constructor.
 
-   - It creates a stack with array of size 'size'.
+   - It creates a stack with an array of size 'size'.
    - It sets top to -1 to indicate that the stack is empty right now.
 
    ```cpp
@@ -82,7 +82,7 @@ Now let's define each function one by one.
 
      **Why?** It's important to do this in destructor because when an object goes out of scope, the *dynamically allocated array* won't be released automatically.
 
-     Just remember that whatever you allocate *dynamically* in constructor must be freed in destructor.
+     Just remember that whatever you allocate *dynamically* in constructor must be freed in the destructor.
 
    ```cpp
    template <typename type, int size>
@@ -117,9 +117,9 @@ Now let's define each function one by one.
 
      because the Boolean operator == will itself return either *true* or *false*.
 
-4. **push()**: insert 'element' at the top of stack, if not overflow.
+4. **push()**: insert 'element' at the top of the stack, if not overflow.
 
-   - First we need to check for **overflow** that is if we have more space in the stack or not for our new element, then if we do we save it otherwise we have two options -
+   - First, we need to check for **overflow** that is if we have more space in the stack or not for our new element, then if we do we save it otherwise we have two options -
 
      1. We can handle overflow with an `if` statement.
 
@@ -220,12 +220,12 @@ Now let's define each function one by one.
 
 ### main Function to test our code:
 
-We created a menu driven main function to perform each operation on our stack.
+We created a menu-driven main function to perform each operation on our stack.
 
 **Note**
 
-- Remember to create stack object with template syntax providing both parameters - *type* and *size*.
-- Remember to handle the possible exceptions thrown by **push**, **pop**, and **get_top_element** with a *try catch* block.
+- Remember to create a stack object with template syntax providing both parameters - *type* and *size*.
+- Remember to handle the possible exceptions thrown by **push**, **pop**, and **get_top_element** with a *try-catch* block.
 - The *what* function used while handling exceptions is a predefined function in all exception classes that will return the message we send while throwing the exceptions.
 
 ```cpp
