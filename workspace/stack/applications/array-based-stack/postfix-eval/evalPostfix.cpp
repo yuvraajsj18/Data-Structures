@@ -39,12 +39,16 @@ double eval_postfix_expression(string expression)
     {
         // get the next symbol from stack - operand or operator
         string symbol = "";
-        while (expression[i] != ' ' && i != operand_stack_size)
+        while (expression[i] != ' ' && i != operand_stack_size)     // keep adding until space is encountered or the string ends
         {
             symbol += expression[i];
             i++;
         }
 
+        if (symbol == "")   // if space is encountered more than once then skip it.
+        {
+            continue;
+        }
         if (isOperand(symbol))
         {
             operand_stack.push(stod(symbol));
@@ -55,10 +59,6 @@ double eval_postfix_expression(string expression)
             double operand1 = operand_stack.pop();
             double result = eval(symbol, operand1, operand2);
             operand_stack.push(result);
-        }
-        else if (symbol == " ")
-        {
-            continue;
         }
         else 
         {
