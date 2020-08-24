@@ -187,7 +187,7 @@ void Stack<type, size> :: clear()
 
 - Once again, if you want any explanation for the code above, it is given [here](./stack.md).
 
-#### evalPostfix.cpp
+## evalPostfix.cpp
 
 - This is the main file for our program.
 
