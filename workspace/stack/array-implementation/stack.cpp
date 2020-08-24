@@ -70,13 +70,12 @@ int main()
                 }
             break;
             case 3:
-                cout << "Stack right now:\n";
                 my_stack.display();
             break;
             case 4:
                 try
                 {
-                    cout << "Top most element: " << my_stack.get_top_element() << endl;
+                    cout << my_stack.get_top_element() << endl;
                 }
                 catch(const std::exception& e)
                 {
