@@ -231,7 +231,7 @@ void Stack<type, size> :: clear()
           }
           if (isOperand(symbol))
           {
-              operand_stack.push(stod(symbol));
+              operand_stack.push(stod(symbol));   // stod converts a string to double value
           }
           else if (isOperator(symbol))
           {
