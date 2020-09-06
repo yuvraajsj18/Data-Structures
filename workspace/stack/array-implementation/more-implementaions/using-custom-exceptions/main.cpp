@@ -19,7 +19,8 @@ int main()
         cout << "\nChoose an operation:\n";
         cout << "1. Push\n" << "2. Pop\n" << "3. Display\n"
         << "4. Display top\n" << "5. Stack empty?\n" << "6. Clear stack\n" 
-        << "7. Exit" << endl;
+        <<"7. Check assignment operator\n" << "8. Check copy constructor\n"
+        << "9. Exit" << endl;
         cout << "Enter a choice(1-6): ";
         cin >> choice;
 
@@ -43,7 +44,8 @@ int main()
                 try
                 {
                     int popped_element = my_stack.pop();
-                    cout << "Top most element popped: " << popped_element << endl;                }
+                    cout << "Top most element popped: " << popped_element << endl;                
+                }
                 catch(const StackException& e)
                 {
                     std::cerr << e.what() << '\n';
@@ -70,6 +72,23 @@ int main()
                 cout << "Stack cleared.\n";
             break;
             case 7:
+            {
+                Stack<int, stack_size> stack2;
+                stack2 = my_stack;
+                cout << "my_stack assigned to stack2\n";
+                cout << "stack2: ";
+                stack2.display();
+            }
+            break;
+            case 8:
+            {
+                Stack<int, stack_size> stack3(my_stack);
+                cout << "my_stack copied to stack3\n";
+                cout << "stack3: ";
+                stack3.display();
+            }
+            break;
+            case 9:
                 exit(0);
             break;
             default:

@@ -15,6 +15,9 @@ class Stack
     public:
         Stack();
         ~Stack();
+        Stack(const Stack<type, size> &obj);  
+
+        Stack<type, size>& operator=(const Stack<type, size> &obj);    
 
         bool is_empty();    // Return true if stack is empty, false otherwise.
         void push(type element);    // insert 'element' at the top of stack, if not overflow

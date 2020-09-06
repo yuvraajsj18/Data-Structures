@@ -1,37 +1,6 @@
 #include "stack.h"
 
-// Exceptions for stack
-
-class StackException : public exception
-{
-    private:
-        string message;
-    public:
-        StackException(const string& err) 
-        {
-            message = err;
-        }
-
-        virtual const char* what() const noexcept
-        {
-            return message.c_str();
-        }
-};
-
-class StackEmptyException : public StackException
-{
-    public:
-        StackEmptyException(const string& err) : StackException(err) {}
-};
-
-class StackFullException : public StackException
-{
-    public:
-        StackFullException(const string& err) : StackException(err) {}
-};
-
-
-// Member Functions of Stack
+// member functions of Stack
 
 template <typename type, int size>
 Stack<type, size> :: Stack()
@@ -48,30 +17,6 @@ Stack<type, size> :: ~Stack()
     delete[] stack;
 }
 
-template <typename type, int size>
-Stack<type, size> :: Stack(const Stack<type, size> &obj)
-{
-    this -> stack = new type[size];
-    this -> top = obj.top;
-    for (int i = 0; i <= top; i++)
-    {
-        this -> stack[i] = obj.stack[i];
-    }
-}
-
-template <typename type, int size>
-Stack<type, size>& Stack<type, size> :: operator=(const Stack<type, size> &obj)
-{
-    this -> top = obj.top;
-    for (int i = 0; i <= top; i++)
-    {
-        this -> stack[i] = obj.stack[i];
-    }
-
-    return *this;
-}
-
-
 // Return true if stack is empty, false otherwise.
 template<typename type, int size>
 bool Stack<type, size> :: is_empty()
@@ -87,7 +32,7 @@ void Stack<type, size> :: push(type element)
     // checks for overflow
     if (top == size - 1)
     {
-        throw StackFullException("Stack Overflow!! No more space to add elements.");
+        throw out_of_range("Stack Overflow!! No more space to add elements.");
     }
 
     // insert element on next position in array
@@ -101,7 +46,7 @@ type Stack<type, size> :: pop()
     // check for underflow
     if (is_empty())
     {
-        throw StackEmptyException("Stack Underflow!! No more element to pop.");
+        throw out_of_range("Stack Underflow!! No more element to pop.");
     }
 
     // pop element
@@ -134,7 +79,7 @@ type Stack<type, size> :: get_top_element()
 {
     if (is_empty())
     {
-        throw StackEmptyException("Stack is empty!!");
+        throw out_of_range("Stack is empty!!");
     }
     return stack[top];
 }
@@ -150,5 +95,3 @@ void Stack<type, size> :: clear()
     // assign new memory
     stack = new type[size];
 }
-
-
