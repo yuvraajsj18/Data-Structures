@@ -50,7 +50,8 @@ while(true)
             << "8. Display" << endl
             << "9. Reverse" << endl
             << "10. Is empty" << endl
-            << "11. Exit" << endl;
+            << "11. concatenate" << endl
+            << "12. Exit" << endl;
         cout << "Enter a choice: ";
         cin >> choice;
 
@@ -136,6 +137,18 @@ while(true)
                     cout << "List is not empty" << endl;
             break;
             case 11:
+            {
+                Slist<type> to_concat;
+                to_concat.add_tail(1); 
+                to_concat.add_tail(2); 
+                to_concat.add_tail(3);
+                cout << "Concatenating your list with [1, 2, 3] into a new list using + and = operator" << endl;
+                Slist<type> newList = list + to_concat;
+                cout << "newList: ";
+                newList.display(); 
+            }
+            break;
+            case 12:
                 exit(0);
             break;
             default:

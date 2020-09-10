@@ -198,3 +198,59 @@ void Slist<type> :: reverse()
 
     tail = temp;
 }
+
+template <typename type>
+void Slist<type> :: concat(Slist<type> &s1, Slist<type> &s2)
+{
+    Node<type> *p = s1.head;
+    Node<type> *q = s2.head;
+    head = p;
+    while (p-> next != NULL)
+    {
+        p = p -> next;
+    }
+    p -> next = q;
+}
+
+template <typename type>
+Slist<type> Slist<type> :: operator+(Slist<type> &s)
+{
+    Slist<type> newList;
+    Node<type> *temp = head;
+
+    while(temp != NULL)
+    {
+        newList.add_tail(temp -> data);
+        temp = temp -> next;
+    }
+    temp = s.head;
+    while(temp != NULL)
+    {
+        newList.add_tail(temp -> data);
+        temp = temp -> next;
+    }
+
+    return newList;
+}
+
+template <typename type>
+Slist<type>& Slist<type> :: operator=(const Slist<type> &s)
+{
+    Node<type> *temp;
+    while (!is_empty())
+    {
+        temp = head -> next;
+        delete head;
+        head = temp;
+    }
+    temp = s.head;
+    head = s.head;
+    while (temp != NULL)
+    {
+        add_tail(temp -> info);
+        temp = temp -> next;
+    }
+
+    return *this;
+}
+

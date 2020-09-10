@@ -46,6 +46,9 @@ class Slist
         int count_node();
         void display();
         void reverse();
+        void concat(Slist<type> &s1, Slist<type> &s2);
+        Slist<type> operator+(Slist<type> &s);
+        Slist<type>& operator=(const Slist<type> &s);
 };
 
 #include "slist.tpp"
