@@ -11,7 +11,7 @@ Slist<type> :: Slist()
 template <typename type>
 Slist<type> :: ~Slist()
 {
-    while (!head)   // while not empty
+    while (head)   // while not empty
     {
         Node<type> *temp = head;  // save head in temp
         delete head;    // delete head
@@ -327,3 +327,53 @@ Node<type>* Slist<type> :: searchNode(type element)
     return temp;
 }
 
+template <typename type>
+void Slist<type> :: delete_three()
+{
+    if (head == NULL || head == tail)
+        return;
+
+    int count = 0;
+    Node<type> *temp = head;
+    Node<type> *pred = NULL;
+    while (temp != NULL)
+    {
+        count++;
+        if (count % 3 == 0)
+        {
+            pred->next = temp->next;
+            count = 0;
+        }
+        if (count != 0)
+            pred = temp;
+
+        temp = pred->next;
+    }
+}
+
+template <typename type>
+bool Slist<type> :: is_same(const Slist<type> &list)
+{
+    if (head == NULL || list.head == NULL)
+    {
+        if (head == NULL && list.head == NULL)
+            return true;
+        else 
+            return false;
+    }
+
+    Node<type> *temp1 = head;
+    Node<type> *temp2 = list.head;
+    while (temp1 != NULL && temp2 != NULL)
+    {
+        if (temp1->data != temp2->data)
+            return false;
+        temp1 = temp1->next;
+        temp2 = temp2->next;
+    }
+
+    if (temp1 == NULL && temp2 == NULL)
+        return true;
+    else
+        return false;
+}

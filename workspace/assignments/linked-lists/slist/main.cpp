@@ -55,7 +55,9 @@ while(true)
             << "13. Insert at position" << endl
             << "14. Remove at position" << endl
             << "15. Search for a node" << endl
-            << "16. Exit" << endl;
+            << "16. Exit" << endl
+            << "17. Delete every three\n"
+            << "18. is same\n";
         cout << "Enter a choice: ";
         cin >> choice;
 
@@ -209,6 +211,24 @@ while(true)
             break;
             case 16:
                 exit(0);
+            break;
+            case 17:
+            {
+                list.delete_three();
+                cout << "Deleted every third element\n";
+                list.display();
+            }
+            break;
+            case 18:
+            {
+                Slist<type> l1;
+                for (int i = 1; i <= 5; i++)
+                    l1.add_tail(i);
+                if (list.is_same(l1))
+                    cout << "Is same as 1,2,3,4,5" << endl;
+                else
+                    cout << "Is not same as 1,2,3,4,5" << endl;
+            }
             break;
             default:
                 cout << "Invalid Input" << endl;

@@ -53,6 +53,12 @@ class Slist
         void insert(type element, int position);
         void remove(int position);
         Node<type>* searchNode(type element);
+
+        // delete every third element from the list
+        void delete_three();
+
+        // compare two lists
+        bool is_same(const Slist<type> &list);
 };
 
 #include "slist.tpp"
