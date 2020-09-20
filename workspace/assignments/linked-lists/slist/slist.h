@@ -59,6 +59,18 @@ class Slist
 
         // compare two lists
         bool is_same(const Slist<type> &list);
+
+        /*
+            removes the first element of the singly linked list and adds it to the end
+            of the list without changing any value of info .
+        */
+       void change();
+
+       /*
+        Given a single linked list of characters, write a function to check whether this list is a
+        palindrome or not. You may use any one additional data structure.
+       */
+      bool is_palindrome();
 };
 
 #include "slist.tpp"

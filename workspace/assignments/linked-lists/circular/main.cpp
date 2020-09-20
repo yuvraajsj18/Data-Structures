@@ -22,7 +22,10 @@ int main()
             << "8. display" << endl
             << "9. isempty" << endl
             << "10. reverse" << endl
-            << "11. Exit" << endl;
+            << "11. Exit" << endl
+            << "12. Delete all" << endl
+            << "13. Concat" << endl
+            << "14. remove ith" << endl;
         cin >> choice;
 
         switch(choice)
@@ -138,6 +141,50 @@ int main()
             break;
             case 11:
                 exit(0);
+            break;
+            case 12:
+            {
+                int K;
+                cout << "Enter a value: ";
+                cin >> K;
+                try
+                {
+                    clist.delete_all(clist, K);
+                    cout << "Deleted all " << K << endl;
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+                clist.display();
+            }
+            break;
+            case 13:
+            {
+                Clist<int> l2;
+                for (int i = 1; i <= 5; i++)
+                    l2.add_tail(i);
+                clist.concat(l2);
+                cout << "Concated your list with 1,2,3,4,5\n";
+                clist.display();
+            }
+            break;
+            case 14:
+            {
+                int i;
+                cout << "Enter position: ";
+                cin >> i;
+                try
+                {
+                    clist.remove(i);
+                    cout << "Removed.\n";
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+                clist.display();
+            }
             break;
             default:
                 cout << "Invalid choice" << endl;

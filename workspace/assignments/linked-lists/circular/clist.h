@@ -47,6 +47,21 @@ class Clist
         int count_node();
         void display();
         void reverse();
+
+        /*
+        delete (L1, K), where L1 is a circular linked list of integers and K is an
+        integer, to delete all occurrences of node with the value K.
+        */
+        static void delete_all(Clist<type> &L1, type K);
+
+        // Write a member function to concatenate two singly circular linked lists.
+        void concat(const Clist<type> &l2);
+
+        /*
+        Write a member function to delete the ith element in a singly circular linked list. The position
+        i is passed as a parameter to this function.
+        */
+       void remove(int i);
 };
 
 #include "clist.tpp"

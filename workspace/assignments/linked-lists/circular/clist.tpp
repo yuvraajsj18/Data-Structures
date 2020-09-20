@@ -201,3 +201,95 @@ void Clist<type> :: reverse()
 
     tail = newTail;
 }
+
+
+template <typename type>
+void Clist<type> :: delete_all(Clist<type> &L1, type K)
+{
+    if (L1.tail == nullptr)
+        throw runtime_error("Underflow!! List is empty");
+
+    if (L1.tail == L1.tail->next && L1.tail->data == K)
+    {
+        delete L1.tail;
+        L1.tail = nullptr;
+    }
+    else
+    {
+        Node<type> *pred = L1.tail;
+        Node<type> *temp = L1.tail->next;
+        while (temp != L1.tail)
+        {
+            if (temp->data == K)
+            {
+                pred->next = temp->next;
+                delete temp;
+                temp = pred->next;
+            }
+            else 
+            {
+                pred = temp;
+                temp = temp->next;
+            }
+        }
+        if (L1.tail->data == K)
+        {
+            pred->next = temp->next;
+            delete L1.tail;
+            L1.tail = pred;
+        }
+    }
+}
+
+template <typename type>
+void Clist<type> :: concat(const Clist<type> &l2)
+{
+    if (l2.tail == nullptr)
+        return;
+    
+    if (l2.tail == l2.tail->next)
+        add_tail(l2.tail->data);
+    else
+    {
+        Node<type> *temp = l2.tail->next;
+        while (temp != l2.tail)
+        {
+            add_tail(temp->data);
+            temp = temp->next;
+        }
+        add_tail(l2.tail->data);
+    }
+}
+
+template <typename type>
+void Clist<type> :: remove(int i)
+{
+    if (tail == nullptr)
+        throw runtime_error("Underflow!!");
+    
+    if (tail == tail->next)
+    {
+        if (i == 1)
+        {
+            delete tail;
+            tail = nullptr;
+        }
+        else
+            throw runtime_error("Not Found");
+    }
+    else
+    {
+        int count = 1;
+        Node<type> *pred = tail;
+        Node<type> *temp = tail->next;   
+        for (; temp != tail && count != i; temp=temp->next, pred=pred->next, count++);
+        if (i > count)
+            throw runtime_error("Not Found");
+
+        pred->next = temp->next;
+        if (temp == tail)   
+            tail = pred;
+        delete temp;
+    }
+}
+

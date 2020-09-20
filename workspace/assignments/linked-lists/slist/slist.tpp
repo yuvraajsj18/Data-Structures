@@ -13,9 +13,9 @@ Slist<type> :: ~Slist()
 {
     while (head)   // while not empty
     {
-        Node<type> *temp = head;  // save head in temp
+        Node<type> *temp = head -> next;  // save head in temp
         delete head;    // delete head
-        head = temp -> next;    // move head ahead using temp
+        head = temp;    // move head ahead using temp
     }
 }
 
@@ -377,3 +377,46 @@ bool Slist<type> :: is_same(const Slist<type> &list)
     else
         return false;
 }
+
+template <typename type>
+void Slist<type> :: change()
+{
+    if (head == NULL || head->next == NULL) // No element or one element
+        return;
+
+    Node<type> *temp = head;
+    head = head->next;
+    Node<type> *tail_node = head;
+    for (; tail_node->next !=NULL; tail_node=tail_node->next);
+    tail_node->next = temp;
+    temp->next = NULL;
+
+    tail = temp;
+}
+
+template <typename type>
+bool Slist<type> :: is_palindrome()
+{
+    if (head == NULL || head -> next == NULL)
+        return true;
+
+    Slist<type> temp_list;
+    Node<type> *temp = head;
+    for (; temp != NULL; temp=temp->next)
+        temp_list.add_tail(temp->data);
+
+    temp_list.reverse();
+
+    temp = head;
+    Node<type> *temp1 = temp_list.head;
+    while (temp != NULL && temp1 != NULL)
+    {
+        if (temp->data != temp1->data)
+            return false;
+        temp = temp->next;
+        temp1 = temp1->next;
+    }
+
+    return true;
+}
+

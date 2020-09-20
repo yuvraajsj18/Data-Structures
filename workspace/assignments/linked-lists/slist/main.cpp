@@ -57,7 +57,9 @@ while(true)
             << "15. Search for a node" << endl
             << "16. Exit" << endl
             << "17. Delete every three\n"
-            << "18. is same\n";
+            << "18. is same\n"
+            << "19. change\n"
+            << "20. palindrome\n";
         cout << "Enter a choice: ";
         cin >> choice;
 
@@ -228,6 +230,21 @@ while(true)
                     cout << "Is same as 1,2,3,4,5" << endl;
                 else
                     cout << "Is not same as 1,2,3,4,5" << endl;
+            }
+            break;
+            case 19:
+            {
+                list.change();
+                cout << "Changed\n";
+                list.display();
+            }
+            break;
+            case 20:
+            {
+                if (list.is_palindrome())
+                    cout << "Is Palindrome\n";
+                else 
+                    cout << "Is not palindrome\n";
             }
             break;
             default:
