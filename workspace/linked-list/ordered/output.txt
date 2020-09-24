@@ -1,0 +1,177 @@
+Ordered Linked List
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 1
+
+Enter an element to insert: 3
+List: 3 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 1
+
+Enter an element to insert: 1
+List: 1 3 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 1
+
+Enter an element to insert: 2
+List: 1 2 3 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 1
+
+Enter an element to insert: 5
+List: 1 2 3 5 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 2
+
+Enter an element to delete: 5
+List: 1 2 3 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 3
+
+List: 1 2 3 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 4
+
+Enter an element to search: 2
+Element found
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 6
+
+Order list is not empty
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 7
+
+Enter an element to insert: 100
+List: 100 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 7
+
+Enter an element to insert: 200
+List: 100 200 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 
+5
+
+Merged list1 and list2
+1 2 3 100 200 
+
+Choose an option:
+1. Insert in list1
+2. Delete in list1
+3. Display in list1
+4. Search in list1
+5. Merge list1 list2
+6. isempty list1
+7. Insert in list2
+8. Delete in list2
+9. Exit
+Enter choice: 9

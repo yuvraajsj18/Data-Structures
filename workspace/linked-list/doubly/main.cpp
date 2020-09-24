@@ -22,7 +22,11 @@ int main()
             << "8. display" << endl
             << "9. isempty" << endl
             << "10. reverse" << endl
-            << "11. Exit" << endl;
+            << "11. Remove at position" << endl
+            << "12. Insert at position" << endl
+            << "13. Search node pointer" << endl
+            << "14. Concat a list" << endl
+            << "15. Exit" << endl;
         cin >> choice;
 
         switch(choice)
@@ -137,6 +141,68 @@ int main()
             }
             break;
             case 11:
+            {
+                int position;
+                cout << "Enter position: ";
+                cin >> position;
+                try
+                {
+                    dlist.remove(position);
+                    cout << "Deleted element at " << position << endl;
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+                dlist.display();
+            }
+            break;
+            case 12:
+            {
+                int position, element;
+                cout << "Enter Position: ";
+                cin >> position;
+                cout << "Enter element: ";
+                cin >> element;
+                try
+                {
+                    dlist.insert(element, position);
+                    cout << "Added." << endl;
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+                dlist.display();
+            }
+            break;
+            case 13:
+            {
+                int element;
+                cout << "Enter element to get its pointer: ";
+                cin >> element;
+                Node<int> *ptr = dlist.searchNode(element);
+                if (ptr == nullptr)
+                    cout << "Element not found" << endl;
+                else 
+                {
+                    cout << "Element found" << endl;
+                    cout << "Pointer address: " << ptr << endl;
+                }
+            }
+            break;
+            case 14:
+            {
+                Dlist<int> l2;
+                for (int i = 1; i <= 5; i++)
+                    l2.add_tail(i);
+
+                dlist.concat(l2);
+                cout << "Your list is concatenate with 1,2,3,4,5\n";
+                dlist.display();
+            }
+            break;
+            case 15:
                 exit(0);
             break;
             default:

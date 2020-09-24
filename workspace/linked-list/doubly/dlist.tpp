@@ -201,3 +201,105 @@ void Dlist<type> :: reverse()
     for (; temp->next != nullptr; temp = temp->next);
     tail = temp;
 }
+
+template <typename type>
+void Dlist<type> :: insert(type element, int position)
+{
+    if (head == nullptr)
+    {
+        if (position == 1)
+            head = tail = new Node<type>(element);
+        else
+            throw runtime_error("Invalid position");
+    }
+    else if (position == 1)
+    {
+        head = new Node<type>(element, nullptr, head);
+        head->next->previous = head;
+    }
+    else
+    {
+        int count = 1;
+        Node<type> *temp = head;
+        for (; temp != nullptr && count != position; count++, temp=temp->next);
+        if (temp == nullptr && count == position)
+        {
+            tail->next = new Node<type>(element, tail, nullptr);
+            tail = tail->next;
+        }
+        else if (temp != nullptr)
+        {
+            Node<type> *newNode = new Node<type>(element, temp->previous, temp);
+            temp->previous->next = newNode;
+            temp->previous = newNode;
+        }
+        else
+            throw runtime_error("Invalid Position");
+    }
+}
+
+template <typename type>
+type Dlist<type> :: remove(int position)
+{
+    if (head == nullptr)
+        throw runtime_error("Underflow!! List is empty.");
+
+    type save_data;
+    
+    if (head == tail)
+    {
+        if (position == 1)
+        {
+            save_data = head->data;
+            delete head;
+            head = tail = nullptr;
+        }
+        else 
+            throw runtime_error("Invalid Postion");
+    }
+    else 
+    {
+        Node<type> *temp = head;
+        int count = 1;
+        for (; temp!= nullptr && count != position; count++, temp=temp->next);
+        if (temp == nullptr)
+            throw runtime_error("Invalid position");
+
+        if (temp != head)
+            temp->previous->next = temp->next;
+        else
+            head = temp->next;
+        if (temp != tail)
+            temp->next->previous = temp->previous;
+        else
+            tail = temp->previous;
+
+        save_data = temp->data;
+        delete temp;
+    }
+
+    return save_data;
+}
+
+template <typename type>
+Node<type>* Dlist<type> :: searchNode(type element)
+{   
+    Node<type> *temp_node = head;
+    for (; temp_node != nullptr && temp_node->data != element; temp_node = temp_node->next);
+
+    return temp_node;
+}
+
+
+// 8  Concatenate two doubly linked lists
+template <typename type>
+void Dlist<type> :: concat(Dlist<type>& l2)
+{
+    if (l2.head == nullptr)
+        return;
+    
+    Node<type> *temp = l2.head;
+    for (; temp != nullptr; temp=temp->next)
+        add_tail(temp->data);
+}
+

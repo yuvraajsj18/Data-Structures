@@ -56,7 +56,12 @@ class Dlist
         bool search(type element);
         int count_node();
         void display();
+
         void reverse();
+        type remove(int position);
+        void insert(type element, int position);
+        Node<type>* searchNode(type element);
+        void concat(Dlist<type>& l2);
 };
 
 #include "dlist.tpp"
