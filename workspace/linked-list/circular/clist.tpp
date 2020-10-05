@@ -9,14 +9,17 @@ Clist<type> :: Clist()
 template <typename type>
 Clist<type> :: ~Clist()
 {
-    Node<type> *temp = tail->next;
-    while (temp != tail)
+    if (tail != nullptr)
     {
-        Node<type> *temp1 = temp;
-        temp = temp->next;
-        delete temp1;
+        Node<type> *temp = tail->next;
+        while (temp != tail)
+        {
+            Node<type> *temp1 = temp;
+            temp = temp->next;
+            delete temp1;
+        }
+        delete tail;
     }
-    delete tail;
 }
 
 template <typename type>
@@ -201,3 +204,98 @@ void Clist<type> :: reverse()
 
     tail = newTail;
 }
+
+template <typename type>
+void Clist<type> :: remove(int i)
+{
+    if (tail == nullptr)
+        throw runtime_error("Underflow!!");
+    
+    if (tail == tail->next)
+    {
+        if (i == 1)
+        {
+            delete tail;
+            tail = nullptr;
+        }
+        else
+            throw runtime_error("Not Found");
+    }
+    else
+    {
+        int count = 1;
+        Node<type> *pred = tail;
+        Node<type> *temp = tail->next;   
+        for (; temp != tail && count != i; temp=temp->next, pred=pred->next, count++);
+        if (i > count)
+            throw runtime_error("Not Found");
+
+        pred->next = temp->next;
+        if (temp == tail)   
+            tail = pred;
+        delete temp;
+    }
+}
+
+template <typename type>
+void Clist<type> :: concat(const Clist<type> &l2)
+{
+    if (l2.tail == nullptr)
+        return;
+    
+    if (l2.tail == l2.tail->next)
+        add_tail(l2.tail->data);
+    else
+    {
+        Node<type> *temp = l2.tail->next;
+        while (temp != l2.tail)
+        {
+            add_tail(temp->data);
+            temp = temp->next;
+        }
+        add_tail(l2.tail->data);
+    }
+}
+
+template <typename type>
+void Clist<type> :: insert(type x, type y)
+{
+    if (tail == nullptr)
+        throw runtime_error("y not found");
+
+    if (tail == tail->next && tail->data != y)
+        throw runtime_error("y not found");
+    else if (tail->data == y)
+    {
+        tail->next = new Node<type>(x, tail->next);
+        tail = tail->next;
+    }
+    else
+    {
+        Node<type> *temp = tail->next;
+
+        while (temp != tail && temp->data != y)
+            temp = temp->next;
+
+        if (temp == tail)
+            throw runtime_error("y not found");
+
+        temp->next = new Node<type>(x, temp->next);
+    }
+}
+
+template <typename type>
+Node<type>* Clist<type> :: searchNode(type element)
+{
+    if (tail != nullptr && tail->data == element)
+        return tail;
+    else if (tail != nullptr)
+    {
+        Node<type> *temp = tail->next;
+        for (; temp != tail && temp->data != element; temp=temp->next);
+        if (temp != tail)
+            return temp;
+    }
+    return nullptr; // Not Found
+}
+

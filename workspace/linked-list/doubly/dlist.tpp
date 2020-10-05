@@ -67,7 +67,7 @@ type Dlist<type> :: delete_head()
     else
     {
         head = head->next;  // update head
-        head->previous = nullptr;   // change new head;s previous from old head to nullptr
+        head->previous = nullptr;   // change new head's previous from old head to nullptr
     }
     
     delete temp_head;

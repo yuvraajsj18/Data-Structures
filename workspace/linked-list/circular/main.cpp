@@ -22,7 +22,11 @@ int main()
             << "8. display" << endl
             << "9. isempty" << endl
             << "10. reverse" << endl
-            << "11. Exit" << endl;
+            << "11. Insert an element x after element y" << endl
+            << "12. Remove an element at position" << endl
+            << "13. Concatenate" << endl
+            << "14. Search Node" << endl
+            << "15. Exit" << endl;
         cin >> choice;
 
         switch(choice)
@@ -137,6 +141,65 @@ int main()
             }
             break;
             case 11:
+            {
+                int x, y;
+                cout << "Enter x: ";
+                cin >> x;
+                cout << "Enter y: ";
+                cin >> y;
+                try
+                {
+                    clist.insert(x, y);
+                    cout << "Inserted." << endl;
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+                clist.display();
+            }
+            break;
+            case 12:
+            {
+                int position;
+                cout << "Enter position: ";
+                cin >> position;
+                try
+                {
+                    clist.remove(position);
+                    cout << "Removed" << endl;
+                }
+                catch(const std::exception& e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+                clist.display();
+            }
+            break;
+            case 13:
+            {
+                Clist<int> c1;
+                for (int i = 1; i <= 5; i++)
+                    c1.add_tail(i);
+
+                cout << "Concatenating your list with 1,2,3,4,5\n";
+                clist.concat(c1);
+                clist.display();
+            }
+            break;
+            case 14:
+            {
+                cout << "Enter an element to get its Node: ";
+                int element;
+                cin >> element;
+                Node<int>* node = clist.searchNode(element);
+                if (node != nullptr)
+                    cout << "Node Found at " << node << endl;
+                else
+                    cout << "Node not found\n";
+            }
+            break; 
+            case 15:
                 exit(0);
             break;
             default:

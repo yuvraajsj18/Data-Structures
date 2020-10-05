@@ -47,6 +47,12 @@ class Clist
         int count_node();
         void display();
         void reverse();
+
+        void remove(int i);
+        void concat(const Clist<type> &l2);
+
+        void insert(type x, type y);
+        Node<type>* searchNode(type element);
 };
 
 #include "clist.tpp"
