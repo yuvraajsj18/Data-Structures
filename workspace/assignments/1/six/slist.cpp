@@ -144,7 +144,7 @@ int Slist<type> :: length()
 }
 
 template <typename type>
-int Slist<type> :: length(Node<type> *&head)
+int Slist<type> :: length(Node<type>*& head)
 {
     if (!(head))
         return 0;

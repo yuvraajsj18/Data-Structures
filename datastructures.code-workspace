@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"files.associations": {
+			"*.tpp": "cpp",
 			"new": "cpp",
 			"ostream": "cpp",
 			"iostream": "cpp",
@@ -49,7 +50,8 @@
 			"sstream": "cpp",
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
-			"typeinfo": "cpp"
+			"typeinfo": "cpp",
+			"list": "cpp"
 		}
 	}
 }

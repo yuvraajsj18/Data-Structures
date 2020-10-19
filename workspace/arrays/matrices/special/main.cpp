@@ -14,6 +14,7 @@ The matrix should be stored by mapping them into 1D arrays.
 #include "./tridiagonal/tridiagonalmatrix.h"
 #include "./uppertriangular/utriangular.h"
 #include "./lowertriangular/ltriangular.h"
+#include "./symmetric/symmetricmatrix.h"
 
 void clearScreen();
 
@@ -84,6 +85,18 @@ int main()
                 ltmat.input();
                 std::cout << "Your lower triangular matrix:\n";
                 ltmat.display();
+            }
+            break;
+            case 5:
+            {
+                int size;
+                std::cout << "Enter dimention: ";
+                std::cin >> size;
+                SymmetricMatrix<int> smat(size);
+                std::cout << "Enter your symmetric matrix:\n";
+                smat.input();
+                std::cout << "Your symmetric matrix:\n";
+                smat.display();
             }
             break;
             case 6:
