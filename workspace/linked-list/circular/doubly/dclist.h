@@ -5,12 +5,16 @@
 #include <stdexcept>
 
 template <typename type>
+class DCList;
+
+template <typename type>
 class Node
 {
     private:
         Node* previous;
         Node* next;
         type data;
+        friend class DCList<type>;
 
     public:
         Node(const type& data, Node* previous=nullptr, Node* next=nullptr);
@@ -20,7 +24,7 @@ template <typename type>
 class DCList
 {
     private:
-        Node* tail;
+        Node<type>* tail;
     
     public:
         DCList();

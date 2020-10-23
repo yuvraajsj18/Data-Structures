@@ -5,7 +5,7 @@
 template <typename type>
 Node<type>::Node(const type& data, Node<type>* previous, Node<type>* next)
 {
-    this->type = data;
+    this->data = data;
     this->previous = previous;
     this->next = next;
 }
@@ -40,13 +40,13 @@ void DCList<type>::insert_front(const type& element)
 {
     if (tail == nullptr)
     {
-        tail = new Node(element);
+        tail = new Node<type>(element);
         tail->previous = tail;
         tail->next = tail;
     }
     else
     {
-        tail->next = new Node(element, tail, tail->next);
+        tail->next = new Node<type>(element, tail, tail->next);
     }
 }
 
@@ -56,13 +56,13 @@ void DCList<type>::insert_after(const type& after, const type& element)
     if (tail == nullptr)
         throw std::runtime_error("Given element not found");
 
-    Node* after_node = tail->next;
+    Node<type>* after_node = tail->next;
     for (; after_node != tail && after_node->data != after; after_node=after_node->next);
 
     if (after_node->data != after)
         throw std::runtime_error("Given element not found");
 
-    Node<type>* new_node = new Node(element, after_node, after_node->next);
+    Node<type>* new_node = new Node<type>(element, after_node, after_node->next);
     after_node->next = new_node;
     new_node->next->previous = new_node;
 }
@@ -72,13 +72,13 @@ void DCList<type>::insert_back(const type& element)
 {
     if (tail == nullptr)
     {
-        tail = new Node(element);
+        tail = new Node<type>(element);
         tail->previous = tail;
         tail->next = tail;
     }
     else
     {
-        tail->next = new Node(element, tail, tail->next);
+        tail->next = new Node<type>(element, tail, tail->next);
         tail = tail->next;
     }
 }
@@ -95,7 +95,10 @@ type DCList<type>::remove_back()
     if (tail == tail->next)
         tail = nullptr;
     else
+    {
+        tail->previous->next = tail->next;
         tail = tail->previous;
+    }
 
     delete temp_tail;
     return save_date;
@@ -165,7 +168,7 @@ void DCList<type>::concat(const DCList<type>& with)
     while (temp != with.tail)
     {
         insert_back(temp->data);
-        temp = temp->data;
+        temp = temp->next;
     }
     insert_back(with.tail->data);
 }
@@ -179,10 +182,10 @@ void DCList<type>::display()
     Node<type>* temp = tail->next;
     while (temp != tail)
     {
-        cout << temp->data << " ";
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
-    cout << tail->data << "\n";
+    std::cout << tail->data << "\n";
 }
 
 template <typename type>
@@ -193,7 +196,7 @@ int DCList<type>::count()
 
     Node<type>* temp = tail->next;
     int count = 1;  // there is one atleast, the tail
-    for (; temp != tail; temp=temp->next);
+    for (; temp != tail; temp=temp->next, count++);
 
     return count;
 }
