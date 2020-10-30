@@ -1,4 +1,4 @@
-#include "nodelist.h"
+#include "sequence.h"
 #include <iostream>
 
 void clearScreen();
@@ -6,7 +6,7 @@ void clearScreen();
 int main()
 {
 
-    NodeList<int> nlist;
+    NodeSequence<int> seq;
     
     while (true)
     {
@@ -25,7 +25,9 @@ int main()
                     << "9. Is empty?\n"
                     << "10.Get size\n"
                     << "11. Display\n"
-                    << "12. Exit\n";
+                    << "12. index of\n"
+                    << "13. at index\n"
+                    << "14. Exit\n";
 
         int choice;
         std::cout << "Choice: ";
@@ -39,7 +41,7 @@ int main()
             std::cout << "Enter an element: ";
             std::cin >> element;
 
-            nlist.insert_front(element);
+            seq.insert_front(element);
             std::cout << "Inserted at front\n";
         }
             break;
@@ -50,7 +52,7 @@ int main()
             std::cout << "Enter an element: ";
             std::cin >> element;
 
-            nlist.insert_back(element);
+            seq.insert_back(element);
             std::cout << "Inserted at back\n";
         }
             break;
@@ -64,14 +66,14 @@ int main()
             std::cout << "Enter a position[1-size]: ";
             std::cin >> position;
 
-            if (position > nlist.size())
+            if (position > seq.size())
                 std::cout << "Invalid position\n";
             else
             {
                 // find iterator position
-                NodeList<int>::Iterator iter = nlist.begin();
-                for (; iter != nlist.end() && position != 1; ++iter, position--);
-                nlist.insert(iter, element);
+                NodeList<int>::Iterator iter = seq.begin();
+                for (; iter != seq.end() && position != 1; ++iter, position--);
+                seq.insert(iter, element);
                 std::cout << "Inserted at position\n";
             }
         }
@@ -81,7 +83,7 @@ int main()
         {
             try
             {
-                nlist.erase_front();
+                seq.erase_front();
                 std::cout << "Erased front\n";
             }
             catch(const std::exception& e)
@@ -96,7 +98,7 @@ int main()
         {
             try
             {
-                nlist.erase_back();
+                seq.erase_back();
                 std::cout << "Erased back\n";
             }
             catch(const std::exception& e)
@@ -113,16 +115,16 @@ int main()
             std::cout << "Enter a position[1-size]: ";
             std::cin >> position;
 
-            if (position > nlist.size())
+            if (position > seq.size())
                 std::cout << "Invalid position\n";
             else
             {
                 // find iterator position
-                NodeList<int>::Iterator iter = nlist.begin();
-                for (; iter != nlist.end() && position != 1; ++iter, position--);
+                NodeList<int>::Iterator iter = seq.begin();
+                for (; iter != seq.end() && position != 1; ++iter, position--);
                 try
                 {
-                    nlist.erase(iter);
+                    seq.erase(iter);
                     std::cout << "Erased\n";
                 }
                 catch(const std::exception& e)
@@ -136,14 +138,14 @@ int main()
         
         case 7:
         {
-            NodeList<int>::Iterator begin_iter = nlist.begin();
+            NodeList<int>::Iterator begin_iter = seq.begin();
             std::cout << "Begin iterator value: " << *begin_iter << "\n";
         }
             break;
         
         case 8:
         {
-            NodeList<int>::Iterator end_iter = nlist.end();
+            NodeList<int>::Iterator end_iter = seq.end();
             std::cout << "End iterator value: " << *end_iter << "\n";
         }
             
@@ -151,7 +153,7 @@ int main()
         
         case 9:
         {
-            if (nlist.empty())
+            if (seq.empty())
                 std::cout << "Node List is empty\n";
             else 
                 std::cout << "Node List is not empty\n";
@@ -160,14 +162,14 @@ int main()
         
         case 10:
         {
-            std::cout << "Size = " << nlist.size() << "\n";
+            std::cout << "Size = " << seq.size() << "\n";
         }
             break;
         
         case 11:
         {
             std::cout << "Node List: ";
-            for (NodeList<int>::Iterator iter = nlist.begin(); iter != nlist.end(); ++iter)
+            for (NodeList<int>::Iterator iter = seq.begin(); iter != seq.end(); ++iter)
                 std::cout << *iter << " ";
             std::cout << "\n";
         }
@@ -175,12 +177,40 @@ int main()
 
         case 12:
         {
+            std::cout << "Index of all positions:\n";
+            for (NodeList<int>::Iterator iter = seq.begin(); iter != seq.end(); ++iter)
+                std::cout << *iter << " at index " << seq.index_of(iter) << "\n";
+            std::cout << "\n";
+        }
+            break;
+
+        case 13:
+        {
+            int index;
+            std::cout << "Enter index: ";
+            std::cin >> index;
+            try
+            {
+               NodeSequence<int>::Iterator position = seq.at_index(index); 
+               std::cout << "Position: " << &position << "\n";
+               std::cout << "Value: " << *position << "\n";
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+        }
+            break;
+
+        case 14:
+        {
             std::cout << "Exiting...\n";
             exit(0);
         }
             break;
         
         default:
+            std::cout << "Invalid option\n";
             break;
         }    
 
