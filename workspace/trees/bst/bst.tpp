@@ -230,3 +230,87 @@ void BST<type>::del_copy(BSTNode<type>*& node)
 }
 
 
+template <typename type>
+void BST<type>::breadth_first()
+{
+    if (this->empty())
+        return;
+
+    std::queue<BSTNode<type>*> nodes_to_visit;
+    BSTNode<type>* temp_node = this->root;
+    
+    nodes_to_visit.push(temp_node);
+
+    while (!nodes_to_visit.empty())
+    {
+        temp_node = nodes_to_visit.pop();
+
+        visit(temp_node);
+
+        if (temp_node->left != nullptr)
+            nodes_to_visit.push(temp_node->left);
+        if (temp_node->right != nullptr)
+            nodes_to_visit.push(temp_node->right);
+    }
+}
+
+
+template <typename type>
+inline void BST<type>::visit(BSTNode<type>* node) const
+{
+    std::cout << node->key << " ";
+}
+
+
+template <typename type>
+void BST<type>::preorder()
+{
+    preorder(this->root);
+}
+
+template <typename type>
+void BST<type>::inorder()
+{
+    inorder(this->root);
+}
+
+template <typename type>
+void BST<type>::postorder()
+{
+    postorder(this->root);
+}
+
+
+template <typename type>
+void BST<type>::preorder(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return;
+
+    visit(node);
+    preorder(node->left);
+    preorder(node->right);
+}
+
+template <typename type>
+void BST<type>::inorder(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return;
+
+    inorder(node->left);
+    visit(node);
+    inorder(node->right);
+}
+
+template <typename type>
+void BST<type>::postorder(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return;
+    
+    postorder(node->left);
+    postorder(node->right);
+    visit(node);
+}
+

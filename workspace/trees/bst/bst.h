@@ -1,6 +1,9 @@
 #ifndef BST_H
 #define BST_H
 
+#include <iostream>
+#include <queue>
+
 template <typename type>
 class BST;
 
@@ -28,7 +31,7 @@ class BST
         void preorder(BSTNode<type>* node);
         void inorder(BSTNode<type>* node);  
         void postorder(BSTNode<type>* node);  
-        void visit(BSTNode<type>* node);
+        inline void visit(BSTNode<type>* node) const;
 
     public:
         BST();
@@ -46,7 +49,8 @@ class BST
         void del_merge(BSTNode<type>*& node);
 
         BSTNode<type>* search(const type& key) const;
-        void change_key(const type& key, const type& new_key);   // search for a key and change its value and place its node appropriately.
+        // // search for a key and change its value and place its node appropriately.
+        void change_key(const type& key, const type& new_key);   // TODO
 
         // Display all nodes -
         void preorder();
