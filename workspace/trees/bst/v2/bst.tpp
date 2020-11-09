@@ -36,6 +36,7 @@ template <typename type>
 inline void BST<type>::clear()         // Public clear()
 {
     this->clear(this->root);    
+    this->root = nullptr;
 }
 
 template <typename type>
@@ -80,7 +81,7 @@ void BST<type>::insert(const type& key)
         if (prev_node->key < key)
             prev_node->right = new BSTNode<type>(key);
         else 
-            prev_node->keft = new BSTNode<type>(key);
+            prev_node->left = new BSTNode<type>(key);
     }
 }
 
@@ -99,18 +100,32 @@ BSTNode<type>* BST<type>::search(BSTNode<type>* node, const type& key) const
         if (node->key == key)
             return node;
         if (node->key < key)
-            temp_node = temp_node->right;
+            node = node->right;
         else 
-            temp_node = temp_node->left;
+            node = node->left;
     }
 
     return nullptr;
 }
 
+template <typename type>
+void BST<type>::change_key(const type& key, const type& new_key)
+{
+    if (this->search(key) != nullptr)
+    {
+        this->find_del_copy(key);
+        this->insert(new_key);
+    }
+    else
+    {
+        std::cout << "key does not exists\n";   
+    }
+}
+
 
 // find the parent to node ptr with key and send it to del_copy function to delete
 template <typename type>
-void BST<type>::find_del_copy(const type& key)     
+void BST<type>::find_del_merge(const type& key)     
 {
     BSTNode<type>* temp_node = this->root;
     BSTNode<type>* prev_node = nullptr;
@@ -119,7 +134,7 @@ void BST<type>::find_del_copy(const type& key)
     while (temp_node != nullptr && temp_node->key != key)
     {
         prev_node = temp_node;
-        else if (temp_node->key < key)
+        if (temp_node->key < key)
             temp_node = temp_node->right;
         else 
             temp_node = temp_node->left;
@@ -168,7 +183,7 @@ void BST<type>::del_merge(BSTNode<type>*& node) // node is parent -> child ptr
 
 
 template <typename type>
-void find_del_copy(const type& key)
+void BST<type>::find_del_copy(const type& key)
 {
     BSTNode<type>* temp_node = this->root;
     BSTNode<type>* prev_node = nullptr;
@@ -243,7 +258,8 @@ void BST<type>::breadth_first()
 
     while (!nodes_to_visit.empty())
     {
-        temp_node = nodes_to_visit.pop();
+        temp_node = nodes_to_visit.front();
+        nodes_to_visit.pop();
 
         visit(temp_node);
 
@@ -265,52 +281,70 @@ inline void BST<type>::visit(BSTNode<type>* node) const
 template <typename type>
 void BST<type>::preorder()
 {
-    preorder(this->root);
+    if (this->root == nullptr)
+        return;
+    
+    std::stack<BSTNode<type>*> travStack;
+    BSTNode<type>* temp_node = this->root;
+
+    travStack.push(temp_node);
+    while (!travStack.empty())
+    {
+        temp_node = travStack.top();
+        travStack.pop();
+        this->visit(temp_node);
+
+        if (temp_node->right != nullptr)
+            travStack.push(temp_node->right);
+        if (temp_node->right != nullptr)
+            travStack.push(temp_node->left);
+    }
 }
 
 template <typename type>
 void BST<type>::inorder()
 {
-    inorder(this->root);
-}
-
-template <typename type>
-void BST<type>::postorder()
-{
-    postorder(this->root);
-}
-
-
-template <typename type>
-void BST<type>::preorder(BSTNode<type>* node)
-{
-    if (node == nullptr)
+    if (this->root == nullptr)
         return;
 
-    visit(node);
-    preorder(node->left);
-    preorder(node->right);
+    std::stack<BSTNode<type>*> travStack;
+    BSTNode<type>* temp_node = this->root;
+
+    while (temp_node != nullptr)
+    {
+        while (temp_node != nullptr)
+        {
+            if (temp_node -> right != nullptr)
+                travStack.push(temp_node->right);
+            travStack.push(temp_node);
+            temp_node = temp_node->left;
+        }
+
+        temp_node = travStack.top();
+        travStack.pop();
+
+        while (!travStack.empty() && temp_node->right == nullptr)
+        {
+            visit(temp_node);
+            temp_node = travStack.top();
+            travStack.pop();
+        }
+
+        visit(temp_node);
+
+        if (!travStack.empty())
+        {
+            temp_node = travStack.top();
+            travStack.pop();
+        }
+        else 
+            temp_node == nullptr;
+    }
 }
 
 template <typename type>
-void BST<type>::inorder(BSTNode<type>* node)
+void BST<type>::postorder() 
 {
-    if (node == nullptr)
-        return;
-
-    inorder(node->left);
-    visit(node);
-    inorder(node->right);
-}
-
-template <typename type>
-void BST<type>::postorder(BSTNode<type>* node)
-{
-    if (node == nullptr)
-        return;
-    
-    postorder(node->left);
-    postorder(node->right);
-    visit(node);
+    // TODO
 }
 

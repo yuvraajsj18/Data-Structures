@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <queue>
+#include <stack>
 
 template <typename type>
 class BST;
@@ -14,6 +15,7 @@ class BSTNode
         type key;
         BSTNode<type>* left;
         BSTNode<type>* right;
+        friend class BST<type>;
 
     public:
         BSTNode();
@@ -28,9 +30,6 @@ class BST
 
         void clear(BSTNode<type>* node);
         BSTNode<type>* search(BSTNode<type>* node, const type& key) const;
-        void preorder(BSTNode<type>* node);
-        void inorder(BSTNode<type>* node);  
-        void postorder(BSTNode<type>* node);  
         inline void visit(BSTNode<type>* node) const;
 
     public:
@@ -50,12 +49,12 @@ class BST
 
         BSTNode<type>* search(const type& key) const;
         // // search for a key and change its value and place its node appropriately.
-        void change_key(const type& key, const type& new_key);   // TODO
+        void change_key(const type& key, const type& new_key);  
 
         // Display all nodes -
-        void preorder();
-        void inorder();
-        void postorder();
+        void preorder();    // iterative
+        void inorder();     // iterative
+        void postorder();   // iterative
         void breadth_first();
 };
 
