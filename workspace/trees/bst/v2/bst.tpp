@@ -345,6 +345,96 @@ void BST<type>::inorder()
 template <typename type>
 void BST<type>::postorder() 
 {
-    // TODO
+    std::stack<BSTNode<type>*> travStack;
+    BSTNode<type>* p = this->root, *q = this->root;
+
+    while (p != nullptr)
+    {
+        for (; p->left != nullptr; p = p->left)
+            travStack.push(p);
+        
+        while (p->right == nullptr || p->right == q)
+        {
+            visit(p);
+            q = p;
+            if (travStack.empty())
+                return;
+            p = travStack.top();
+            travStack.pop();
+        }
+        travStack.push(p);
+        p = p->right;
+    }
 }
 
+// count leaf nodes
+template <typename type>
+int BST<type>::count_leaf()
+{
+    return count_leaf(this->root);
+}
+
+template <typename type>
+int BST<type>::count_leaf(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return 0;
+    
+    if (node->left == nullptr && node->right == nullptr)
+        return 1;
+    
+    return count_leaf(node->left) + count_leaf(node->right);
+}
+
+template <typename type>
+int BST<type>::count_nonleaf()
+{
+    return count_nonleaf(this->root);
+}
+
+template <typename type>
+int BST<type>::count_nonleaf(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return 0;
+
+    if (node->left == nullptr && node->right == nullptr)
+        return 0;
+    
+    return count_nonleaf(node->left) + count_leaf(node->right) + 1;
+}
+
+template <typename type>
+int BST<type>::height()
+{
+    return height(this->root);
+}
+
+template <typename type>
+int BST<type>::height(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return 0;
+
+    return std::max(height(node->left), height(node->right)) + 1;
+}
+
+template <typename type>
+void BST<type>::mirror()
+{
+    mirror(this->root);
+}
+
+template <typename type>
+void BST<type>::mirror(BSTNode<type>* node)
+{
+    if (node == nullptr)
+        return;
+
+    BSTNode<type>* temp_node = node->left;
+    node->left = node->right;
+    node->right = temp_node;
+
+    mirror(node->left);
+    mirror(node->right);
+}

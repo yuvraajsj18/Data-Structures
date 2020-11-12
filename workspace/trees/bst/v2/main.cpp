@@ -23,7 +23,11 @@ int main()
                     << "9. empty?\n"
                     << "10. clear\n"
                     << "11. Change key\n"
-                    << "12. Exit\n";
+                    << "12. Mirror\n"
+                    << "13. Height\n"
+                    << "14. Count leaves\n"
+                    << "15. Count non leaves\n"
+                    << "16. Exit\n";
 
         int choice;
         std::cout << "Choice: ";
@@ -143,6 +147,28 @@ int main()
             }
                 break;
             case 12:
+            {
+                bst.mirror();
+                std::cout << "Mirrored\n";
+                bst.breadth_first();
+            }
+                break;
+            case 13:
+            {
+                std::cout << "Height: " << bst.height() << "\n";
+            }
+                break;
+            case 14:
+            {
+                std::cout << "Leaves: " << bst.count_leaf() << "\n";
+            }
+                break;
+            case 15:
+            {  
+                std::cout << "Non-leaves: " << bst.count_nonleaf() << "\n";
+            }   
+                break;
+            case 16:
             {
                 std::cout << "Exiting...\n";
                 exit(0);

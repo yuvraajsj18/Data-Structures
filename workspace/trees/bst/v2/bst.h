@@ -32,6 +32,11 @@ class BST
         BSTNode<type>* search(BSTNode<type>* node, const type& key) const;
         inline void visit(BSTNode<type>* node) const;
 
+        int count_leaf(BSTNode<type>* node);
+        int count_nonleaf(BSTNode<type>* node);
+        int height(BSTNode<type>* node);
+        void mirror(BSTNode<type>* node);
+
     public:
         BST();
         ~BST();
@@ -56,6 +61,15 @@ class BST
         void inorder();     // iterative
         void postorder();   // iterative
         void breadth_first();
+
+        // mirror image
+        inline void mirror();
+        // compute height
+        inline int height();
+        // compute leaf nodes
+        inline int count_leaf();
+        // compute non leaf nodes
+        inline int count_nonleaf();
 };
 
 #include "bst.tpp"
