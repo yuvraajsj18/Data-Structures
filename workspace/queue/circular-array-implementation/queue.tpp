@@ -89,3 +89,23 @@ void Queue<type> :: clear()
     num_elements = 0;
     queue = new type[max_size];
 }
+
+
+
+//   // Check if the queue is full
+//   bool isFull() {
+//     if (front == 0 && rear == SIZE - 1) {
+//       return true;
+//     }
+//     if (front == rear + 1) {
+//       return true;
+//     }
+//     return false;
+//   }
+//   // Check if the queue is empty
+//   bool isEmpty() {
+//     if (front == -1)
+//       return true;
+//     else
+//       return false;
+//   }

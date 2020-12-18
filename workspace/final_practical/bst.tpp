@@ -108,20 +108,6 @@ BSTNode<type>* BST<type>::search(BSTNode<type>* node, const type& key) const
     return nullptr;
 }
 
-template <typename type>
-void BST<type>::change_key(const type& key, const type& new_key)
-{
-    if (this->search(key) != nullptr)
-    {
-        this->find_del_copy(key);
-        this->insert(new_key);
-    }
-    else
-    {
-        std::cout << "key does not exists\n";   
-    }
-}
-
 
 // find the parent to node ptr with key and send it to del_copy function to delete
 template <typename type>
@@ -173,7 +159,7 @@ void BST<type>::del_merge(BSTNode<type>*& node) // node is parent -> child ptr
             while (temp_node->right != nullptr)
                 temp_node = temp_node->right;   // get the right most child of left child of to_delete node
             
-            temp_node->right = node->right;     // Merge
+            temp_node->right = node->right;
             node = node->left;  
         }
 
@@ -246,32 +232,6 @@ void BST<type>::del_copy(BSTNode<type>*& node)
 
 
 template <typename type>
-void BST<type>::breadth_first()
-{
-    if (this->empty())
-        return;
-
-    std::queue<BSTNode<type>*> nodes_to_visit;
-    BSTNode<type>* temp_node = this->root;
-    
-    nodes_to_visit.push(temp_node);
-
-    while (!nodes_to_visit.empty())
-    {
-        temp_node = nodes_to_visit.front();
-        nodes_to_visit.pop();
-
-        visit(temp_node);
-
-        if (temp_node->left != nullptr)
-            nodes_to_visit.push(temp_node->left);
-        if (temp_node->right != nullptr)
-            nodes_to_visit.push(temp_node->right);
-    }
-}
-
-
-template <typename type>
 inline void BST<type>::visit(BSTNode<type>* node) const
 {
     std::cout << node->key << " ";
@@ -279,121 +239,31 @@ inline void BST<type>::visit(BSTNode<type>* node) const
 
 
 template <typename type>
-void BST<type>::preorder()
-{
-    if (this->root == nullptr)
-        return;
-    
-    std::stack<BSTNode<type>*> travStack;
-    BSTNode<type>* temp_node = this->root;
-
-    travStack.push(temp_node);
-    while (!travStack.empty())
-    {
-        temp_node = travStack.top();
-        travStack.pop();
-        this->visit(temp_node);
-
-        if (temp_node->right != nullptr)
-            travStack.push(temp_node->right);
-        if (temp_node->right != nullptr)
-            travStack.push(temp_node->left);
-    }
-}
-
-template <typename type>
 void BST<type>::inorder()
 {
-    if (this->root == nullptr)
-        return;
-
-    std::stack<BSTNode<type>*> travStack;
-    BSTNode<type>* temp_node = this->root;
-
-    while (temp_node != nullptr)
-    {
-        while (temp_node != nullptr)
-        {
-            if (temp_node -> right != nullptr)
-                travStack.push(temp_node->right);
-            travStack.push(temp_node);
-            temp_node = temp_node->left;
-        }
-
-        temp_node = travStack.top();
-        travStack.pop();
-
-        while (!travStack.empty() && temp_node->right == nullptr)
-        {
-            visit(temp_node);
-            temp_node = travStack.top();
-            travStack.pop();
-        }
-
-        visit(temp_node);
-
-        if (!travStack.empty())
-        {
-            temp_node = travStack.top();
-            travStack.pop();
-        }
-        else 
-            temp_node == nullptr;
-    }
+    inorder(this->root);
 }
 
 template <typename type>
-void BST<type>::postorder() 
-{
-    std::stack<BSTNode<type>*> travStack;
-    BSTNode<type>* p = this->root, *q = this->root;
-
-    while (p != nullptr)
-    {
-        for (; p->left != nullptr; p = p->left)
-            travStack.push(p);
-        
-        while (p->right == nullptr || p->right == q)
-        {
-            visit(p);
-            q = p;
-            if (travStack.empty())
-                return;
-            p = travStack.top();
-            travStack.pop();
-        }
-        travStack.push(p);
-        p = p->right;
-    }
-}
-
-// count leaf nodes
-template <typename type>
-int BST<type>::count_leaf()
-{
-    return count_leaf(this->root);
-}
-
-template <typename type>
-int BST<type>::count_leaf(BSTNode<type>* node)
+void BST<type>::inorder(BSTNode<type>* node)
 {
     if (node == nullptr)
-        return 0;
-    
-    if (node->left == nullptr && node->right == nullptr)
-        return 1;
-    
-    return count_leaf(node->left) + count_leaf(node->right);
+        return;
+
+    inorder(node->left);
+    visit(node);
+    inorder(node->right);
 }
 
+
 template <typename type>
-int BST<type>::count_nonleaf()
+int BST<type>::sum_nonleaf()
 {
-    return count_nonleaf(this->root);
+    return sum_nonleaf(this->root);
 }
 
 template <typename type>
-int BST<type>::count_nonleaf(BSTNode<type>* node)
+int BST<type>::sum_nonleaf(BSTNode<type>* node)
 {
     if (node == nullptr)
         return 0;
@@ -401,40 +271,26 @@ int BST<type>::count_nonleaf(BSTNode<type>* node)
     if (node->left == nullptr && node->right == nullptr)
         return 0;
     
-    return count_nonleaf(node->left) + count_leaf(node->right) + 1;
+    return sum_nonleaf(node->left) + sum_nonleaf(node->right) + node->key;
 }
 
+
 template <typename type>
-int BST<type>::height()
+void BST<type>::leaf_inorder()
 {
-    return height(this->root);
+    leaf_inorder(this->root);
 }
 
 template <typename type>
-int BST<type>::height(BSTNode<type>* node)
-{
-    if (node == nullptr)
-        return 0;
-
-    return std::max(height(node->left), height(node->right)) + 1;
-}
-
-template <typename type>
-void BST<type>::mirror()
-{
-    mirror(this->root);
-}
-
-template <typename type>
-void BST<type>::mirror(BSTNode<type>* node)
+void BST<type>::leaf_inorder(BSTNode<type>* node)
 {
     if (node == nullptr)
         return;
 
-    BSTNode<type>* temp_node = node->left;
-    node->left = node->right;
-    node->right = temp_node;
+    leaf_inorder(node->left);
 
-    mirror(node->left);
-    mirror(node->right);
+    if (node->right == nullptr && node->left == nullptr)    // if leaf node
+        visit(node);        
+    
+    leaf_inorder(node->right);
 }

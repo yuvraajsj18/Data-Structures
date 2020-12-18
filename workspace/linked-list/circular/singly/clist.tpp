@@ -299,3 +299,24 @@ Node<type>* Clist<type> :: searchNode(type element)
     return nullptr; // Not Found
 }
 
+
+template <typename type>
+int Clist<type>::count_key(type x)
+{
+    if (tail == nullptr)
+        return 0;
+
+    int count = 1;  // there is tail at least
+    Node<type> *temp = tail->next;
+    while (temp != tail)
+    {
+        if (temp->data == x)
+            count++;
+
+        temp = temp->next;
+    }
+
+    return count;
+}
+
+

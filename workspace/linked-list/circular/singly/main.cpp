@@ -26,7 +26,8 @@ int main()
             << "12. Remove an element at position" << endl
             << "13. Concatenate" << endl
             << "14. Search Node" << endl
-            << "15. Exit" << endl;
+            << "15. count key\n"
+            << "16. Exit" << endl;
         cin >> choice;
 
         switch(choice)
@@ -198,8 +199,17 @@ int main()
                 else
                     cout << "Node not found\n";
             }
-            break; 
+            break;
             case 15:
+            {
+                int key;
+                cout << "Enter key to count occurance: ";
+                cin >> key;
+
+                cout << "occurs: " << clist.count_key(key) << "\n";
+            } 
+            break;
+            case 16:
                 exit(0);
             break;
             default:

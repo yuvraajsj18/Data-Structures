@@ -53,6 +53,9 @@ class Clist
 
         void insert(type x, type y);
         Node<type>* searchNode(type element);
+
+        int count_key(type x);
+
 };
 
 #include "clist.tpp"
